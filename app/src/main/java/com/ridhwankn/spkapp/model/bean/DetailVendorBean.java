@@ -1,8 +1,8 @@
-package com.ridhwankn.spkapp.model;
+package com.ridhwankn.spkapp.model.bean;
 
 import java.io.Serializable;
 
-public class DetailVendor implements Serializable {
+public class DetailVendorBean implements Serializable {
     public String nameVendor;
     public double numStar;
     public String city;

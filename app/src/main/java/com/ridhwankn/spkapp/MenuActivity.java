@@ -37,5 +37,10 @@ public class MenuActivity extends AppCompatActivity {
         binding.ivLogout.setOnClickListener(v -> {
             finish();
         });
+
+        binding.ivSpk.setOnClickListener(v->{
+            Intent intent = new Intent(this, SpkVendorWeddingActivity.class);
+            startActivity(intent);
+        });
     }
 }

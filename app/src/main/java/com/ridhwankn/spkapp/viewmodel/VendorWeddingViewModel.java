@@ -4,17 +4,17 @@ import androidx.lifecycle.ViewModel;
 
 import com.google.gson.Gson;
 import com.ridhwankn.spkapp.model.Content;
-import com.ridhwankn.spkapp.model.DetailVendor;
+import com.ridhwankn.spkapp.model.bean.DetailVendorBean;
 
 import java.util.ArrayList;
 
 public class VendorWeddingViewModel extends ViewModel {
 
-    public ArrayList<DetailVendor> getDetail(){
+    public ArrayList<DetailVendorBean> getDetail(){
         Gson gson = new Gson();
         Content content = gson.fromJson(result, Content.class);
-        ArrayList<DetailVendor> detailVendor = content.getDetailVendor();
-        return detailVendor;
+        ArrayList<DetailVendorBean> detailVendorBean = content.getDetailVendor();
+        return detailVendorBean;
     }
 
     String result = "{\n" +

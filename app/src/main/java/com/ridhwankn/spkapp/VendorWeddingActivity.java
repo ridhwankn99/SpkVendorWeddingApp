@@ -10,8 +10,7 @@ import android.view.View;
 
 import com.ridhwankn.spkapp.adapter.VendorWeddingAdapter;
 import com.ridhwankn.spkapp.databinding.ActivityVendorWeddingBinding;
-import com.ridhwankn.spkapp.model.Content;
-import com.ridhwankn.spkapp.model.DetailVendor;
+import com.ridhwankn.spkapp.model.bean.DetailVendorBean;
 import com.ridhwankn.spkapp.viewmodel.VendorWeddingViewModel;
 
 import java.util.ArrayList;
@@ -32,17 +31,17 @@ public class VendorWeddingActivity extends AppCompatActivity {
     }
 
     private void initData(){
-        ArrayList<DetailVendor> detail = viewModel.getDetail();
+        ArrayList<DetailVendorBean> detail = viewModel.getDetail();
         adapter = new VendorWeddingAdapter(this, detail);
         binding.rvListWedding.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.rvListWedding.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new VendorWeddingAdapter.MyItemClickListener() {
             @Override
-            public void onItemClick(View view, int position, DetailVendor detailVendor) {
+            public void onItemClick(View view, int position, DetailVendorBean detailVendorBean) {
                 Intent intent = new Intent(VendorWeddingActivity.this, DetailVendorWeddingActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("data", detailVendor);
+                bundle.putSerializable("data", detailVendorBean);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

@@ -2,7 +2,6 @@ package com.ridhwankn.spkapp.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,24 +14,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.ridhwankn.spkapp.R;
-import com.ridhwankn.spkapp.model.DetailVendor;
+import com.ridhwankn.spkapp.model.bean.DetailVendorBean;
 
 import java.util.ArrayList;
 
 public class VendorWeddingAdapter extends RecyclerView.Adapter<VendorWeddingAdapter.MyViewHolder> {
 
-    private ArrayList<DetailVendor> detailVendorsList;
+    private ArrayList<DetailVendorBean> detailVendorsListBean;
     private Context mContext;
     private MyItemClickListener mItemClickListener;
 
 
-    public VendorWeddingAdapter(Context context, ArrayList<DetailVendor> detailVendorsList){
+    public VendorWeddingAdapter(Context context, ArrayList<DetailVendorBean> detailVendorsListBean){
         this.mContext = context;
-        this.detailVendorsList = detailVendorsList;
+        this.detailVendorsListBean = detailVendorsListBean;
     }
 
-    public void setListDataItems(ArrayList<DetailVendor> detailList){
-        this.detailVendorsList = detailList;
+    public void setListDataItems(ArrayList<DetailVendorBean> detailList){
+        this.detailVendorsListBean = detailList;
         notifyDataSetChanged();
     }
 
@@ -46,23 +45,23 @@ public class VendorWeddingAdapter extends RecyclerView.Adapter<VendorWeddingAdap
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        DetailVendor detailVendor = detailVendorsList.get(position);
-        holder.tvNameVendor.setText(detailVendor.nameVendor);
-        holder.location.setText(detailVendor.location);
-        holder.rating.setRating((float) detailVendor.numStar);
+        DetailVendorBean detailVendorBean = detailVendorsListBean.get(position);
+        holder.tvNameVendor.setText(detailVendorBean.nameVendor);
+        holder.location.setText(detailVendorBean.location);
+        holder.rating.setRating((float) detailVendorBean.numStar);
         Glide.with(mContext)
-                .load(detailVendor.image)
+                .load(detailVendorBean.image)
                 .into(holder.logo);
         holder.itemView.setOnClickListener(v->{
             if (mItemClickListener != null){
-                mItemClickListener.onItemClick(v, position, detailVendor);
+                mItemClickListener.onItemClick(v, position, detailVendorBean);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return detailVendorsList.size();
+        return detailVendorsListBean.size();
     }
 
     public void setOnItemClickListener(MyItemClickListener listener){
@@ -87,6 +86,6 @@ public class VendorWeddingAdapter extends RecyclerView.Adapter<VendorWeddingAdap
         }
     }
     public interface MyItemClickListener {
-        void onItemClick(View view, int position, DetailVendor detailVendor);
+        void onItemClick(View view, int position, DetailVendorBean detailVendorBean);
     }
 }

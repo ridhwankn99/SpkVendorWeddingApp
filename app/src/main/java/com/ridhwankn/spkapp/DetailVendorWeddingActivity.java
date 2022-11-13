@@ -7,11 +7,11 @@ import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
 import com.ridhwankn.spkapp.databinding.ActivityDetailVendorWeddingBinding;
-import com.ridhwankn.spkapp.model.DetailVendor;
+import com.ridhwankn.spkapp.model.bean.DetailVendorBean;
 
 public class DetailVendorWeddingActivity extends AppCompatActivity {
     ActivityDetailVendorWeddingBinding binding;
-    private DetailVendor detailVendor;
+    private DetailVendorBean detailVendorBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,17 +23,17 @@ public class DetailVendorWeddingActivity extends AppCompatActivity {
 
     private void initData(){
         Intent mData = getIntent();
-        detailVendor = (DetailVendor) mData.getSerializableExtra("data");
+        detailVendorBean = (DetailVendorBean) mData.getSerializableExtra("data");
 
-        if (detailVendor!=null){
+        if (detailVendorBean !=null){
             Glide.with(getApplicationContext())
-                    .load(detailVendor.image)
+                    .load(detailVendorBean.image)
                     .into(binding.ivLogoDetail);
-            binding.title.setText(detailVendor.nameVendor);
-            binding.tvAboutMe.setText(detailVendor.aboutMe);
-            binding.tvServiceSet.setText(detailVendor.service);
-            binding.tvAddrs.setText(detailVendor.address);
-            binding.tvLocation.setText(detailVendor.location);
+            binding.title.setText(detailVendorBean.nameVendor);
+            binding.tvAboutMe.setText(detailVendorBean.aboutMe);
+            binding.tvServiceSet.setText(detailVendorBean.service);
+            binding.tvAddrs.setText(detailVendorBean.address);
+            binding.tvLocation.setText(detailVendorBean.location);
         }
     }
 }
