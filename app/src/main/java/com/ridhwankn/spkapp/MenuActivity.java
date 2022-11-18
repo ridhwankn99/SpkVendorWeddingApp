@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.text.format.DateFormat;
 
 import com.ridhwankn.spkapp.databinding.ActivityMenuBinding;
+
+import java.util.Date;
 
 public class MenuActivity extends AppCompatActivity {
     ActivityMenuBinding binding;
@@ -26,6 +28,7 @@ public class MenuActivity extends AppCompatActivity {
         name = getIntent().getStringExtra("name");
 
         binding.tvName.setText("Hi "+name);
+        binding.tvDate.setText(getDate().toString());
     }
 
     private void initView(){
@@ -42,5 +45,15 @@ public class MenuActivity extends AppCompatActivity {
             Intent intent = new Intent(this, SpkVendorWeddingActivity.class);
             startActivity(intent);
         });
+        binding.ivAppInfo.setOnClickListener(v->{
+            Intent intent = new Intent(this, AppInfoActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    private CharSequence getDate(){
+        Date d = new Date();
+        CharSequence s  = DateFormat.format("MMMM d, yyyy ", d.getTime());
+        return s;
     }
 }

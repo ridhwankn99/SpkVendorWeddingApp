@@ -29,6 +29,9 @@
         android:theme="@style/Theme.SpkAplication"
         tools:targetApi="31">
         <activity
+            android:name=".AppInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".ResultVendorWeddingActivity"
             android:exported="false" />
         <activity
