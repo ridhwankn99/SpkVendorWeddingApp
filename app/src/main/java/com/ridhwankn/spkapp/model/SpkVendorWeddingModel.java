@@ -1,6 +1,11 @@
 package com.ridhwankn.spkapp.model;
 
-public class SpkVendorWeddingModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
+public class SpkVendorWeddingModel implements Parcelable {
     private String nameVendor;
     private String nameGedung;
     private double price;
@@ -20,6 +25,28 @@ public class SpkVendorWeddingModel {
         this.rasaMakanan = rasaMakanan;
 
     }
+
+    protected SpkVendorWeddingModel(Parcel in) {
+        nameVendor = in.readString();
+        nameGedung = in.readString();
+        price = in.readDouble();
+        rating = in.readDouble();
+        luasGedung = in.readDouble();
+        luasParkir = in.readDouble();
+        rasaMakanan = in.readInt();
+    }
+
+    public static final Creator<SpkVendorWeddingModel> CREATOR = new Creator<SpkVendorWeddingModel>() {
+        @Override
+        public SpkVendorWeddingModel createFromParcel(Parcel in) {
+            return new SpkVendorWeddingModel(in);
+        }
+
+        @Override
+        public SpkVendorWeddingModel[] newArray(int size) {
+            return new SpkVendorWeddingModel[size];
+        }
+    };
 
     public String getNameVendor() {
         return nameVendor;
@@ -75,5 +102,21 @@ public class SpkVendorWeddingModel {
 
     public void setRasaMakanan(int rasaMakanan) {
         this.rasaMakanan = rasaMakanan;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(nameVendor);
+        dest.writeString(nameGedung);
+        dest.writeDouble(price);
+        dest.writeDouble(rating);
+        dest.writeDouble(luasGedung);
+        dest.writeDouble(luasParkir);
+        dest.writeInt(rasaMakanan);
     }
 }

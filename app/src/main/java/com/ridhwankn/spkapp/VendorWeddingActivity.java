@@ -27,7 +27,13 @@ public class VendorWeddingActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         viewModel = new ViewModelProvider(this).get(VendorWeddingViewModel.class);
         initData();
+        initView();
+    }
 
+    private void initView(){
+        binding.topBar.ivBack.setOnClickListener(v->{
+            finish();
+        });
     }
 
     private void initData(){

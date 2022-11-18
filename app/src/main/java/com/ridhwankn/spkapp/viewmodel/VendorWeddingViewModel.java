@@ -3,6 +3,7 @@ package com.ridhwankn.spkapp.viewmodel;
 import androidx.lifecycle.ViewModel;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.ridhwankn.spkapp.model.Content;
 import com.ridhwankn.spkapp.model.bean.DetailVendorBean;
 

@@ -61,7 +61,10 @@ public class VendorWeddingAdapter extends RecyclerView.Adapter<VendorWeddingAdap
 
     @Override
     public int getItemCount() {
-        return detailVendorsListBean.size();
+        if (detailVendorsListBean!=null){
+            return detailVendorsListBean.size();
+        }
+        return 0;
     }
 
     public void setOnItemClickListener(MyItemClickListener listener){

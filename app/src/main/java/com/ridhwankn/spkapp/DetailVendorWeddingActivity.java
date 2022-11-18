@@ -19,6 +19,14 @@ public class DetailVendorWeddingActivity extends AppCompatActivity {
         binding = ActivityDetailVendorWeddingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initData();
+        initView();
+    }
+
+    private void initView(){
+        binding.topBar.tvTitle.setText("Detail Vendor");
+        binding.topBar.ivBack.setOnClickListener(v->{
+            finish();
+        });
     }
 
     private void initData(){
