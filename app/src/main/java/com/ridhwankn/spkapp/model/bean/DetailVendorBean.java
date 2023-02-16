@@ -3,29 +3,29 @@ package com.ridhwankn.spkapp.model.bean;
 import java.io.Serializable;
 
 public class DetailVendorBean implements Serializable {
-    public String nameVendor;
-    public double numStar;
+    public String vendorName;
+    public String rating;
     public String city;
-    public String aboutMe;
+    public String description;
     public String address;
     public String location;
     public String service;
-    public String image;
+    public String imageLogo;
 
-    public String getNameVendor() {
-        return nameVendor;
+    public String getVendorName() {
+        return vendorName;
     }
 
-    public void setNameVendor(String nameVendor) {
-        this.nameVendor = nameVendor;
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
     }
 
-    public double getNumStar() {
-        return numStar;
+    public String getRating() {
+        return rating;
     }
 
-    public void setNumStar(double numStar) {
-        this.numStar = numStar;
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 
     public String getCity() {
@@ -36,12 +36,12 @@ public class DetailVendorBean implements Serializable {
         this.city = city;
     }
 
-    public String getAboutMe() {
-        return aboutMe;
+    public String getDescription() {
+        return description;
     }
 
-    public void setAboutMe(String aboutMe) {
-        this.aboutMe = aboutMe;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getAddress() {
@@ -68,11 +68,11 @@ public class DetailVendorBean implements Serializable {
         this.service = service;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageLogo() {
+        return imageLogo;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageLogo(String imageLogo) {
+        this.imageLogo = imageLogo;
     }
 }

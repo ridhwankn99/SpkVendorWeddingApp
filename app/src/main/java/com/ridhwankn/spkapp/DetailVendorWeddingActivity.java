@@ -1,11 +1,13 @@
 package com.ridhwankn.spkapp;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.util.Base64;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.os.Bundle;
-
-import com.bumptech.glide.Glide;
 import com.ridhwankn.spkapp.databinding.ActivityDetailVendorWeddingBinding;
 import com.ridhwankn.spkapp.model.bean.DetailVendorBean;
 
@@ -29,19 +31,21 @@ public class DetailVendorWeddingActivity extends AppCompatActivity {
         });
     }
 
-    private void initData(){
+    private void initData() {
         Intent mData = getIntent();
         detailVendorBean = (DetailVendorBean) mData.getSerializableExtra("data");
 
-        if (detailVendorBean !=null){
-            Glide.with(getApplicationContext())
-                    .load(detailVendorBean.image)
-                    .into(binding.ivLogoDetail);
-            binding.title.setText(detailVendorBean.nameVendor);
-            binding.tvAboutMe.setText(detailVendorBean.aboutMe);
-            binding.tvServiceSet.setText(detailVendorBean.service);
-            binding.tvAddrs.setText(detailVendorBean.address);
-            binding.tvLocation.setText(detailVendorBean.location);
-        }
+//        if (detailVendorBean !=null){
+//            Glide.with(getApplicationContext())
+//                    .load(detailVendorBean.imageLogo)
+//                    .into(binding.ivLogoDetail);
+        byte[] bytes = Base64.decode(detailVendorBean.imageLogo, Base64.DEFAULT);
+        Bitmap bm = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        binding.ivLogoDetail.setImageBitmap(bm);
+        binding.title.setText(detailVendorBean.vendorName);
+        binding.tvAboutMe.setText(detailVendorBean.description);
+        binding.tvServiceSet.setText(detailVendorBean.service);
+        binding.tvAddrs.setText(detailVendorBean.address);
+        binding.tvLocation.setText(detailVendorBean.location);
     }
 }

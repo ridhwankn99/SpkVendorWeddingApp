@@ -32,6 +32,9 @@
         android:theme="@style/Theme.SpkAplication"
         tools:targetApi="31">
         <activity
+            android:name=".RegisterVenueActivity"
+            android:exported="false" />
+        <activity
             android:name=".CreatedAccountActivity"
             android:exported="false" />
         <activity

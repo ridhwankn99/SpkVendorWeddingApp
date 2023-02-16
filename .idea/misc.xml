@@ -4,11 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/RidhwanKhairullah/Documents/Apps/SpkWedding/SpkVendorWeddingApp/app/src/main/res/drawable/button_background.xml" value="0.155" />
+        <entry key="..\:/Users/RidhwanKhairullah/Documents/Apps/SpkWedding/SpkVendorWeddingApp/app/src/main/res/drawable/image_background.xml" value="0.1865" />
         <entry key="..\:/Users/RidhwanKhairullah/Documents/Apps/SpkWedding/SpkVendorWeddingApp/app/src/main/res/layout/activity_created_account.xml" value="0.2" />
         <entry key="..\:/Users/RidhwanKhairullah/Documents/Apps/SpkWedding/SpkVendorWeddingApp/app/src/main/res/layout/activity_detail_vendor_wedding.xml" value="0.1453125" />
         <entry key="..\:/Users/RidhwanKhairullah/Documents/Apps/SpkWedding/SpkVendorWeddingApp/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/Users/RidhwanKhairullah/Documents/Apps/SpkWedding/SpkVendorWeddingApp/app/src/main/res/layout/activity_menu.xml" value="0.203125" />
+        <entry key="..\:/Users/RidhwanKhairullah/Documents/Apps/SpkWedding/SpkVendorWeddingApp/app/src/main/res/layout/activity_register_product.xml" value="0.203125" />
+        <entry key="..\:/Users/RidhwanKhairullah/Documents/Apps/SpkWedding/SpkVendorWeddingApp/app/src/main/res/layout/activity_register_venue.xml" value="0.20364583333333333" />
         <entry key="..\:/Users/RidhwanKhairullah/Documents/Apps/SpkWedding/SpkVendorWeddingApp/app/src/main/res/layout/activity_result_vendor_wedding.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/RidhwanKhairullah/Documents/Apps/SpkWedding/SpkVendorWeddingApp/app/src/main/res/layout/activity_spk_vendor_wedding.xml" value="0.203125" />
+        <entry key="..\:/Users/RidhwanKhairullah/Documents/Apps/SpkWedding/SpkVendorWeddingApp/app/src/main/res/layout/activity_vendor_list_wedding.xml" value="0.1453125" />
+        <entry key="..\:/Users/RidhwanKhairullah/Documents/Apps/SpkWedding/SpkVendorWeddingApp/app/src/main/res/layout/activity_vendor_wedding.xml" value="0.1453125" />
         <entry key="..\:/Users/RidhwanKhairullah/Documents/Apps/SpkWedding/SpkVendorWeddingApp/app/src/main/res/layout/list_item.xml" value="0.108203125" />
+        <entry key="..\:/Users/RidhwanKhairullah/Documents/Apps/SpkWedding/SpkVendorWeddingApp/app/src/main/res/layout/list_vendor_wedding.xml" value="0.1453125" />
         <entry key="..\:/Users/RidhwanKhairullah/Documents/Apps/SpkWedding/SpkVendorWeddingApp/app/src/main/res/layout/top_bar.xml" value="0.2" />
         <entry key="..\:/Users/ridhw/AndroidStudioProjects/SpkAplication/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.137" />
         <entry key="..\:/Users/ridhw/AndroidStudioProjects/SpkAplication/app/src/main/res/drawable/background_btn_white.xml" value="0.1545" />

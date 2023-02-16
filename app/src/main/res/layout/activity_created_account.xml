@@ -15,7 +15,7 @@
         android:id="@+id/tvSubTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:text="Signup to keep exploring amazing destinations arround the world!"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -58,6 +58,20 @@
         app:layout_constraintEnd_toEndOf="@+id/etPassword"
         app:layout_constraintTop_toTopOf="@+id/etPassword" />
 
+    <EditText
+        android:id="@+id/etNameVendor"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_background"
+        android:hint="Vendor Name"
+        android:visibility="gone"
+        android:paddingLeft="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputLayout" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayout"
         android:layout_width="match_parent"
@@ -82,27 +96,26 @@
         android:id="@+id/btnCreated"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="50dp"
         android:background="@drawable/button_background_dark"
         android:gravity="center"
         android:text="LET'S GET STARTED"
         android:textColor="#000000"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvNotice"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputLayout" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvNotice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="40dp"
         android:text="By Creating an account, you agree to our Term &amp; Conditions and agree to Privacy Policy."
         android:textColor="@color/black"
         android:textSize="15sp"
-        android:padding="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCreated" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

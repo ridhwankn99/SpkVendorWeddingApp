@@ -1,5 +1,6 @@
 package com.ridhwankn.spkapp;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -17,8 +18,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ridhwankn.spkapp.databinding.ActivityCreatedAccountBinding;
 
-import java.util.UUID;
-
 public class CreatedAccountActivity extends AppCompatActivity {
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance()
             .getReferenceFromUrl("https://spkwedding-b87ac-default-rtdb.firebaseio.com");
@@ -28,6 +27,7 @@ public class CreatedAccountActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapterItems;
     private String role = "";
     private boolean mIsPasswordVisible = false;
+    private static ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,35 +61,64 @@ public class CreatedAccountActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
                 role = item;
-                Toast.makeText(getApplicationContext(), "Item " +item, Toast.LENGTH_SHORT).show();
+                if (item.equalsIgnoreCase("vendor")){
+                    binding.etNameVendor.setVisibility(View.VISIBLE);
+                } else {
+                    binding.etNameVendor.setVisibility(View.GONE);
+                }
+//                Toast.makeText(getApplicationContext(), "Item " +item, Toast.LENGTH_SHORT).show();
             }
         });
 
         binding.btnCreated.setOnClickListener(view -> {
+            loading().show();
             final String username = binding.etName.getText().toString();
             final String password = binding.etPassword.getText().toString();
-            databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.hasChild(username)){
-                        Toast.makeText(CreatedAccountActivity.this, "Username is already registered", Toast.LENGTH_SHORT).show();
-                    } else {
+            final String vendorName = binding.etNameVendor.getText().toString();
+            if (username.isEmpty() || password.isEmpty() || vendorName.isEmpty() || role.isEmpty()){
+                Toast.makeText(getApplicationContext(), "field cannot be empty", Toast.LENGTH_SHORT).show();
+                dismisDialog();
+            } else {
+                databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.hasChild(username)){
+                            Toast.makeText(CreatedAccountActivity.this, "Username is already registered", Toast.LENGTH_SHORT).show();
+                        } else {
 //                        String uniqueID = UUID.randomUUID().toString();
-                        databaseReference.child("users").child(username).child("username").setValue(username);
-                        databaseReference.child("users").child(username).child("password").setValue(password);
+                            databaseReference.child("users").child(username).child("username").setValue(username);
+                            databaseReference.child("users").child(username).child("password").setValue(password);
+                            databaseReference.child("users").child(username).child("role").setValue(role);
+                            databaseReference.child("users").child(username).child("vendorName").setValue(vendorName);
 
-                        Toast.makeText(CreatedAccountActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
-                        finish();
+                            Toast.makeText(CreatedAccountActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                        dismisDialog();
                     }
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                }
-            });
-
-
+                    }
+                });
+            }
         });
+    }
+
+    private ProgressDialog loading(){
+        progressDialog = new ProgressDialog(CreatedAccountActivity.this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Loading");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setProgress(0);
+
+        return progressDialog;
+    }
+
+    public void dismisDialog(){
+        if(progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
     }
 }

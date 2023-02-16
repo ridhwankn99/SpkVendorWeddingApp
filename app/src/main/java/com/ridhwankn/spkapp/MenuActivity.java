@@ -49,6 +49,11 @@ public class MenuActivity extends AppCompatActivity {
             Intent intent = new Intent(this, AppInfoActivity.class);
             startActivity(intent);
         });
+        binding.ivRegVenue.setOnClickListener(v->{
+            Intent intent = new Intent(this, RegisterVenueActivity.class);
+            intent.putExtra("name", name);
+            startActivity(intent);
+        });
     }
 
     private CharSequence getDate(){

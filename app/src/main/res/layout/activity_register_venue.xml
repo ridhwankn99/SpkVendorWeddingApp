@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RegisterVenueActivity">
+    <include
+        android:id="@+id/topBar"
+        layout="@layout/top_bar" />
+
+    <LinearLayout
+        android:id="@+id/cl1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Daftarkan Best Venue kamu disini agar bisa bersaing dengan Vendor lainnya!!"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Nama Vendor"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etNameVendor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:visibility="visible"
+                        android:layout_weight="2" />
+                    <TextView
+                        android:id="@+id/tvNameVendor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:visibility="gone"
+                        android:textSize="18sp"
+                        android:layout_weight="2"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Nama Gedung"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etNameGedung"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="2" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Harga"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:hint="Contoh: 100000000"
+                        android:digits="0123456789"
+                        android:layout_weight="2" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Rating Vendor"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etRating"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:hint="Nilai 1-5"
+                        android:digits="12345."
+                        android:layout_weight="2" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Jumlah Undangan"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etUndangan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:hint=""
+                        android:digits="0123456789."
+                        android:layout_weight="2" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Kapasitas Tamu Gedung"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etMaxTamu"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:hint="Maksimal jumlah \ntamu (Orang)"
+                        android:digits="0123456789."
+                        android:layout_weight="2" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Rasa Makanan"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etRasaMakanan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:padding="8dp"
+                        android:hint="Nilai 1-10"
+                        android:digits="0123456789"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Deskripsi"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etDesc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:padding="8dp"
+                        android:hint="Penjelasan mengenai vendor anda"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Layanan"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/etLayanan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:padding="8dp"
+                        android:text="All in"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Alamat"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etAddress"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:padding="8dp"
+                        android:hint="Alamat"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Lokasi"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etLocation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:padding="8dp"
+                        android:hint="Lokasi"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="No. WA"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etNoWa"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:padding="8dp"
+                        android:hint=""
+                        android:digits="0123456789"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Email"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etEmail"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:padding="8dp"
+                        android:hint="email"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:id="@+id/ivLogo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:minWidth="240dp"
+                        android:minHeight="240dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/image_background"/>
+
+                    <TextView
+                        android:id="@+id/btnUploadImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Upload Photo Your Logo"
+                        android:layout_marginTop="10dp"
+                        android:minWidth="40dp"
+                        android:minHeight="30dp"
+                        android:padding="10dp"
+                        android:textColor="@color/black"
+                        android:background="@drawable/button_background_dark"
+                        android:layout_gravity="center"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/btnSave"
+                        android:layout_width="125dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="0dp"
+                        android:text="Save"
+                        android:visibility="visible"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="#000000"
+                        android:textSize="24sp"
+                        android:background="@drawable/button_background_dark"
+                        />
+                    <TextView
+                        android:id="@+id/btnEdit"
+                        android:layout_width="125dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Edit"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="#000000"
+                        android:textSize="24sp"
+                        android:visibility="gone"
+                        android:background="@drawable/button_background_dark"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>

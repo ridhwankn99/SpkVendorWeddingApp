@@ -2,6 +2,9 @@ package com.ridhwankn.spkapp.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,12 +49,15 @@ public class VendorWeddingAdapter extends RecyclerView.Adapter<VendorWeddingAdap
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         DetailVendorBean detailVendorBean = detailVendorsListBean.get(position);
-        holder.tvNameVendor.setText(detailVendorBean.nameVendor);
+        holder.tvNameVendor.setText(detailVendorBean.vendorName);
         holder.location.setText(detailVendorBean.location);
-        holder.rating.setRating((float) detailVendorBean.numStar);
-        Glide.with(mContext)
-                .load(detailVendorBean.image)
-                .into(holder.logo);
+        holder.rating.setRating(Float.parseFloat(detailVendorBean.rating));
+        byte [] bytes = Base64.decode(detailVendorBean.imageLogo, Base64.DEFAULT);
+        Bitmap bm = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        holder.logo.setImageBitmap(bm);
+//        Glide.with(mContext)
+//                .load(detailVendorBean.imageLogo)
+//                .into(holder.logo);
         holder.itemView.setOnClickListener(v->{
             if (mItemClickListener != null){
                 mItemClickListener.onItemClick(v, position, detailVendorBean);

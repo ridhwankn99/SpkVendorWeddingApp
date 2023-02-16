@@ -12,7 +12,6 @@ import com.ridhwankn.spkapp.adapter.SpkVendorWeddingAdapter;
 import com.ridhwankn.spkapp.databinding.ActivitySpkVendorWeddingBinding;
 import com.ridhwankn.spkapp.model.SpkVendorWeddingModel;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -54,7 +53,7 @@ public class SpkVendorWeddingActivity extends AppCompatActivity {
         });
         binding.btnInput.setOnClickListener(v->{
             if (binding.etNameVendor.getText().toString().equals("")||binding.etNameGedung.getText().toString().equals("")||binding.etRating.getText().toString().equals("")||binding.etRasaMakanan.getText().toString().equals("")
-                    ||binding.etPrice.getText().toString().equals("")||binding.etLuasGedung.getText().toString().equals("")||binding.etLuasParkir.getText().toString().equals("")){
+                    ||binding.etPrice.getText().toString().equals("")||binding.etMaxTamu.getText().toString().equals("")||binding.etLuasParkir.getText().toString().equals("")){
                 Toast.makeText(this, "Form tidak boleh kosong", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -63,7 +62,7 @@ public class SpkVendorWeddingActivity extends AppCompatActivity {
                     binding.etNameGedung.getText().toString(),
                     Double.parseDouble(binding.etPrice.getText().toString()),
                     Double.parseDouble(binding.etRating.getText().toString()),
-                    Double.parseDouble(binding.etLuasGedung.getText().toString()),
+                    Double.parseDouble(binding.etMaxTamu.getText().toString()),
                     Double.parseDouble(binding.etLuasParkir.getText().toString()),
                     Integer.parseInt(binding.etRasaMakanan.getText().toString())
             ));
@@ -127,7 +126,7 @@ public class SpkVendorWeddingActivity extends AppCompatActivity {
         binding.etNameGedung.getText().clear();
         binding.etPrice.getText().clear();
         binding.etRating.getText().clear();
-        binding.etLuasGedung.getText().clear();
+        binding.etMaxTamu.getText().clear();
         binding.etLuasParkir.getText().clear();
         binding.etRasaMakanan.getText().clear();
     }
