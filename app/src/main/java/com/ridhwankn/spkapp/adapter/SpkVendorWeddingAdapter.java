@@ -39,8 +39,8 @@ public class SpkVendorWeddingAdapter extends RecyclerView.Adapter<SpkVendorWeddi
         holder.tvNameGedung.setText(bean.getNameGedung());
         holder.tvPrice.setText(formatCurrency(bean.getPrice()));
         holder.tvRating.setText(Double.toString(bean.getRating()));
-        holder.tvLuasGedung.setText(Double.toString(bean.getLuasGedung()));
-        holder.tvLuasParkir.setText(Double.toString(bean.getLuasParkir()));
+        holder.tvLuasGedung.setText(Integer.toString(bean.getMaxGuest()));
+        holder.tvLuasParkir.setText(Integer.toString(bean.getTotalInvitation()));
         holder.tvRasaMakanan.setText(Integer.toString(bean.getRasaMakanan()));
     }
 

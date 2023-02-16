@@ -19,6 +19,18 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
+        <SearchView
+            android:id="@+id/searchV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/allrounded_white"
+            android:queryHint="Search Your Vendor"
+            android:iconifiedByDefault="false"
+            android:hint="Search"/>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -118,7 +130,7 @@
                         android:layout_height="wrap_content"
                         android:padding="8dp"
                         android:hint="Nilai 1-5"
-                        android:digits="12345."
+                        android:digits="123456789."
                         android:layout_weight="2" />
                 </LinearLayout>
 
@@ -137,11 +149,11 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/etMaxTamu"
+                        android:id="@+id/etMaxGuest"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
-                        android:hint="Maksimal jumlah \ntamu (Orang)"
+                        android:hint="Maksimal jumlah tamu \npada gedung (Orang)"
                         android:digits="0123456789."
                         android:layout_weight="2" />
                 </LinearLayout>
@@ -156,16 +168,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Luas Parkir"
+                        android:text="Jumlah Undangan"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/etLuasParkir"
+                        android:id="@+id/etTtlInvitation"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
-                        android:hint="Satuan m2"
                         android:digits="0123456789."
                         android:layout_weight="2" />
                 </LinearLayout>
@@ -191,6 +202,30 @@
                         android:layout_weight="2"
                         android:padding="8dp"
                         android:hint="Nilai 1-10"
+                        android:digits="0123456789"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Layanan"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/etService"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:padding="8dp"
+                        android:text="All In"
+                        android:textColor="@color/black"
                         android:digits="0123456789"/>
                 </LinearLayout>
                 <LinearLayout

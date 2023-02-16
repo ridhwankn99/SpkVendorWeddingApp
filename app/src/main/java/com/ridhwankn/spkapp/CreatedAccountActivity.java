@@ -27,6 +27,7 @@ public class CreatedAccountActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapterItems;
     private String role = "";
     private boolean mIsPasswordVisible = false;
+    private boolean vendorNameField = false;
     private static ProgressDialog progressDialog;
 
     @Override
@@ -63,7 +64,9 @@ public class CreatedAccountActivity extends AppCompatActivity {
                 role = item;
                 if (item.equalsIgnoreCase("vendor")){
                     binding.etNameVendor.setVisibility(View.VISIBLE);
+                    vendorNameField = true;
                 } else {
+                    vendorNameField = false;
                     binding.etNameVendor.setVisibility(View.GONE);
                 }
 //                Toast.makeText(getApplicationContext(), "Item " +item, Toast.LENGTH_SHORT).show();
@@ -75,8 +78,11 @@ public class CreatedAccountActivity extends AppCompatActivity {
             final String username = binding.etName.getText().toString();
             final String password = binding.etPassword.getText().toString();
             final String vendorName = binding.etNameVendor.getText().toString();
-            if (username.isEmpty() || password.isEmpty() || vendorName.isEmpty() || role.isEmpty()){
+            if (username.isEmpty() || password.isEmpty() || role.isEmpty()){
                 Toast.makeText(getApplicationContext(), "field cannot be empty", Toast.LENGTH_SHORT).show();
+                dismisDialog();
+            } else if (vendorNameField && vendorName.isEmpty()){
+                Toast.makeText(getApplicationContext(), "Field cannot be empty", Toast.LENGTH_SHORT).show();
                 dismisDialog();
             } else {
                 databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {

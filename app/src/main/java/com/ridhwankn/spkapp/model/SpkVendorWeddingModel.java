@@ -3,25 +3,23 @@ package com.ridhwankn.spkapp.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
-
 public class SpkVendorWeddingModel implements Parcelable {
     private String nameVendor;
     private String nameGedung;
     private double price;
     private double rating;
-    private double luasGedung;
-    private double luasParkir;
+    private int MaxGuest;
+    private int TotalInvitation;
     private int rasaMakanan;
 
     public SpkVendorWeddingModel(String nameVendor, String nameGedung, double price, double rating,
-                                 double luasGedung, double luasParkir, int rasaMakanan){
+                                 int MaxGuest, int TotalInvitation, int rasaMakanan){
         this.nameVendor = nameVendor;
         this.nameGedung = nameGedung;
         this.price = price;
         this.rating = rating;
-        this.luasGedung = luasGedung;
-        this.luasParkir = luasParkir;
+        this.MaxGuest = MaxGuest;
+        this.TotalInvitation = TotalInvitation;
         this.rasaMakanan = rasaMakanan;
 
     }
@@ -31,8 +29,8 @@ public class SpkVendorWeddingModel implements Parcelable {
         nameGedung = in.readString();
         price = in.readDouble();
         rating = in.readDouble();
-        luasGedung = in.readDouble();
-        luasParkir = in.readDouble();
+        MaxGuest = in.readInt();
+        TotalInvitation = in.readInt();
         rasaMakanan = in.readInt();
     }
 
@@ -80,20 +78,20 @@ public class SpkVendorWeddingModel implements Parcelable {
         this.rating = rating;
     }
 
-    public double getLuasGedung() {
-        return luasGedung;
+    public int getMaxGuest() {
+        return MaxGuest;
     }
 
-    public void setLuasGedung(double luasGedung) {
-        this.luasGedung = luasGedung;
+    public void setMaxGuest(int maxGuest) {
+        this.MaxGuest = maxGuest;
     }
 
-    public double getLuasParkir() {
-        return luasParkir;
+    public int getTotalInvitation() {
+        return TotalInvitation;
     }
 
-    public void setLuasParkir(double luasParkir) {
-        this.luasParkir = luasParkir;
+    public void setTotalInvitation(int totalInvitation) {
+        this.TotalInvitation = totalInvitation;
     }
 
     public int getRasaMakanan() {
@@ -115,8 +113,8 @@ public class SpkVendorWeddingModel implements Parcelable {
         dest.writeString(nameGedung);
         dest.writeDouble(price);
         dest.writeDouble(rating);
-        dest.writeDouble(luasGedung);
-        dest.writeDouble(luasParkir);
+        dest.writeDouble(MaxGuest);
+        dest.writeDouble(TotalInvitation);
         dest.writeInt(rasaMakanan);
     }
 }

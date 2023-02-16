@@ -1,13 +1,21 @@
 package com.ridhwankn.spkapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.widget.SearchView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.ridhwankn.spkapp.adapter.SpkVendorWeddingAdapter;
 import com.ridhwankn.spkapp.databinding.ActivitySpkVendorWeddingBinding;
 import com.ridhwankn.spkapp.model.SpkVendorWeddingModel;
@@ -24,6 +32,9 @@ public class SpkVendorWeddingActivity extends AppCompatActivity {
     private ArrayList<Double> normalisasi = new ArrayList<>();
     private ArrayList<Double> valueV = new ArrayList<>();
     private double sumNormalisasi = 0.0;
+    private static ProgressDialog progressDialog;
+    private DatabaseReference databaseReference = FirebaseDatabase.getInstance()
+            .getReferenceFromUrl("https://spkwedding-b87ac-default-rtdb.firebaseio.com");
 
     private double W1= -0.238;
     private double W2= 0.238;
@@ -40,6 +51,7 @@ public class SpkVendorWeddingActivity extends AppCompatActivity {
 
         initData();
         initView();
+        getSearchVendor();
     }
 
     private void initData(){
@@ -53,7 +65,7 @@ public class SpkVendorWeddingActivity extends AppCompatActivity {
         });
         binding.btnInput.setOnClickListener(v->{
             if (binding.etNameVendor.getText().toString().equals("")||binding.etNameGedung.getText().toString().equals("")||binding.etRating.getText().toString().equals("")||binding.etRasaMakanan.getText().toString().equals("")
-                    ||binding.etPrice.getText().toString().equals("")||binding.etMaxTamu.getText().toString().equals("")||binding.etLuasParkir.getText().toString().equals("")){
+                    ||binding.etPrice.getText().toString().equals("")||binding.etMaxGuest.getText().toString().equals("")||binding.etTtlInvitation.getText().toString().equals("")){
                 Toast.makeText(this, "Form tidak boleh kosong", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -62,8 +74,8 @@ public class SpkVendorWeddingActivity extends AppCompatActivity {
                     binding.etNameGedung.getText().toString(),
                     Double.parseDouble(binding.etPrice.getText().toString()),
                     Double.parseDouble(binding.etRating.getText().toString()),
-                    Double.parseDouble(binding.etMaxTamu.getText().toString()),
-                    Double.parseDouble(binding.etLuasParkir.getText().toString()),
+                    Integer.parseInt(binding.etMaxGuest.getText().toString()),
+                    Integer.parseInt(binding.etTtlInvitation.getText().toString()),
                     Integer.parseInt(binding.etRasaMakanan.getText().toString())
             ));
             list2.addAll(list);
@@ -81,8 +93,8 @@ public class SpkVendorWeddingActivity extends AppCompatActivity {
             for (int i =0; i<list2.size(); i++){
                 normalisasi.add(Math.pow(list2.get(i).getPrice(),W1)
                         *Math.pow(list2.get(i).getRating(),W2)
-                        *Math.pow(list2.get(i).getLuasGedung(),W3)
-                        *Math.pow(list2.get(i).getLuasParkir(),W4)
+                        *Math.pow(list2.get(i).getMaxGuest(),W3)
+                        *Math.pow(list2.get(i).getTotalInvitation(),W4)
                         *Math.pow(list2.get(i).getRasaMakanan(),W5)
                 );
             }
@@ -104,8 +116,8 @@ public class SpkVendorWeddingActivity extends AppCompatActivity {
                        list2.get(i).getNameGedung(),
                        list2.get(i).getPrice(),
                        list2.get(i).getRating(),
-                       list2.get(i).getLuasGedung(),
-                       list2.get(i).getLuasParkir(),
+                       list2.get(i).getMaxGuest(),
+                       list2.get(i).getTotalInvitation(),
                        list2.get(i).getRasaMakanan()
 
                     ));
@@ -114,7 +126,11 @@ public class SpkVendorWeddingActivity extends AppCompatActivity {
                 }
             }
             Intent intent = new Intent(SpkVendorWeddingActivity.this, ResultVendorWeddingActivity.class);
-            intent.putParcelableArrayListExtra("data", (ArrayList<? extends Parcelable>) listFix);
+//            intent.putParcelableArrayListExtra("data", (ArrayList<? extends Parcelable>) listFix);
+            intent.putExtra("price", listFix.get(0).getPrice());
+            intent.putExtra("vendorName", listFix.get(0).getNameVendor());
+            intent.putExtra("nameGedung", listFix.get(0).getNameGedung());
+            intent.putExtra("ttlInvitation", listFix.get(0).getTotalInvitation());
             startActivity(intent);
             System.out.println("list" + listFix.get(0));
         });
@@ -126,8 +142,67 @@ public class SpkVendorWeddingActivity extends AppCompatActivity {
         binding.etNameGedung.getText().clear();
         binding.etPrice.getText().clear();
         binding.etRating.getText().clear();
-        binding.etMaxTamu.getText().clear();
-        binding.etLuasParkir.getText().clear();
+        binding.etMaxGuest.getText().clear();
+        binding.etTtlInvitation.getText().clear();
         binding.etRasaMakanan.getText().clear();
+    }
+
+    private void getSearchVendor(){
+        binding.searchV.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                getDataByQueryDb(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+    }
+
+    private void getDataByQueryDb(String query){
+        loading().show();
+        databaseReference.child("vendor").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChild(query)){
+                    binding.etNameVendor.setText(snapshot.child(query).child("vendorName").getValue(String.class));
+                    binding.etNameGedung.setText(snapshot.child(query).child("venue").getValue(String.class));
+                    binding.etPrice.setText(snapshot.child(query).child("price").getValue(String.class));
+                    binding.etRating.setText(snapshot.child(query).child("rating").getValue(String.class));
+                    binding.etTtlInvitation.setText(snapshot.child(query).child("invitation").getValue(String.class));
+                    binding.etMaxGuest.setText(snapshot.child(query).child("maximumGuests").getValue(String.class));
+                    binding.etRasaMakanan.setText(snapshot.child(query).child("tasteFood").getValue(String.class));
+                }
+                dismisDialog();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void setDataByQuery(String query){
+//        databaseReference.child("vendor").addListenerForSingleValueEvent()
+    }
+
+    private ProgressDialog loading(){
+        progressDialog = new ProgressDialog(SpkVendorWeddingActivity.this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Loading");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setProgress(0);
+
+        return progressDialog;
+    }
+
+    public void dismisDialog(){
+        if(progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
     }
 }

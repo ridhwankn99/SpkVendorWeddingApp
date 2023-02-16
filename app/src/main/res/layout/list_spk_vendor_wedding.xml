@@ -107,7 +107,7 @@
                 android:layout_weight="1"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:text="Luas Gedung" />
+                android:text="Kapasitas Tamu Gedung" />
 
             <TextView
                 android:id="@+id/tvLuasGedung"
@@ -128,7 +128,7 @@
                 android:layout_weight="1"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:text="Luas Parkir" />
+                android:text="Jumlah Undangan" />
 
             <TextView
                 android:id="@+id/tvLuasParkir"

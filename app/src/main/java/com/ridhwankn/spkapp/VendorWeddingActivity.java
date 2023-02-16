@@ -40,6 +40,7 @@ public class VendorWeddingActivity extends AppCompatActivity {
     }
 
     private void initView(){
+        binding.topBar.tvTitle.setText("Vendor Wedding");
         binding.topBar.ivBack.setOnClickListener(v->{
             finish();
         });

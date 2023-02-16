@@ -208,12 +208,14 @@ public class RegisterVenueActivity extends AppCompatActivity {
                     binding.btnEdit.setVisibility(View.VISIBLE);
 
                     dismisDialog();
+                } else {
+                    dismisDialog();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                dismisDialog();
             }
         });
     }
