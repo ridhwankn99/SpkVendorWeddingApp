@@ -1,5 +1,6 @@
 package com.ridhwankn.spkapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class MenuActivity extends AppCompatActivity {
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance()
             .getReferenceFromUrl("https://spkwedding-b87ac-default-rtdb.firebaseio.com");
     private String role ="";
+    private static ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,12 +46,13 @@ public class MenuActivity extends AppCompatActivity {
 
         binding.tvName.setText("Hi "+name);
         binding.tvDate.setText(getDate().toString());
-
+        loading().show();
         databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChild(name)){
                     role = snapshot.child(name).child("role").getValue(String.class);
+                    dismisDialog();
                 }
             }
 
@@ -81,7 +84,7 @@ public class MenuActivity extends AppCompatActivity {
         });
 
         binding.ivSpk.setOnClickListener(v->{
-            if (role.contains("customer")){
+            if (role.contains("Customer")){
                 UserBean.getInstance().setUsername(name);
                 Intent intent = new Intent(this, SpkVendorWeddingActivity.class);
                 startActivity(intent);
@@ -115,5 +118,21 @@ public class MenuActivity extends AppCompatActivity {
         Date d = new Date();
         CharSequence s  = DateFormat.format("MMMM d, yyyy ", d.getTime());
         return s;
+    }
+
+    private ProgressDialog loading(){
+        progressDialog = new ProgressDialog(MenuActivity.this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Loading");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setProgress(0);
+
+        return progressDialog;
+    }
+
+    private void dismisDialog(){
+        if(progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
     }
 }

@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ridhwankn.spkapp.databinding.ActivityDetailVendorWeddingBinding;
 import com.ridhwankn.spkapp.model.bean.DetailVendorBean;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 public class DetailVendorWeddingActivity extends AppCompatActivity {
     ActivityDetailVendorWeddingBinding binding;
     private DetailVendorBean detailVendorBean;
@@ -47,5 +50,16 @@ public class DetailVendorWeddingActivity extends AppCompatActivity {
         binding.tvServiceSet.setText(detailVendorBean.service);
         binding.tvAddrs.setText(detailVendorBean.address);
         binding.tvLocation.setText(detailVendorBean.location);
+        binding.tvPrice.setText(formatCurrency(Double.parseDouble(detailVendorBean.price)));
+        binding.tvNoWa.setText(detailVendorBean.noWa);
+        binding.tvEmail.setText(detailVendorBean.email);
+        binding.tvInvitation.setText(detailVendorBean.invitation);
+        binding.tvVenue.setText(detailVendorBean.venue);
+    }
+
+    public static String formatCurrency(double amount){
+        NumberFormat formatter = new DecimalFormat("#,###");
+        String formattedNumber = formatter.format(amount);
+        return "Rp. "+formattedNumber;
     }
 }

@@ -138,7 +138,7 @@
                         android:layout_height="wrap_content"
                         android:padding="8dp"
                         android:hint="Nilai 1-5"
-                        android:digits="12345."
+                        android:digits="123456789."
                         android:layout_weight="2" />
                 </LinearLayout>
 
