@@ -27,7 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ridhwankn.spkapp.databinding.ActivityResultVendorWeddingBinding;
-import com.ridhwankn.spkapp.model.SpkVendorWeddingModel;
+import com.ridhwankn.spkapp.model.bean.SpkVendorWeddingBean;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,7 +38,7 @@ import java.util.ArrayList;
 
 public class ResultVendorWeddingActivity extends AppCompatActivity {
     private ActivityResultVendorWeddingBinding binding;
-    private ArrayList<SpkVendorWeddingModel> list= new ArrayList<>();
+    private ArrayList<SpkVendorWeddingBean> list= new ArrayList<>();
     private double price = 0.0;
     private String vendorName = "";
     private String nameGedung = "";
@@ -237,6 +237,15 @@ public class ResultVendorWeddingActivity extends AppCompatActivity {
         // location we are closing our PDF file.
         pdfDocument.close();
     }
+
+//    private void generatedPdfFromView(View view){
+//    }
+//
+//    private void createPdfFromView(View view){
+//        final Dialog dialog = new Dialog(this);
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.setContentView();
+//    }
 
 
     private boolean checkPermission() {

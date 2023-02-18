@@ -3,13 +3,13 @@ package com.ridhwankn.spkapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,21 +17,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ridhwankn.spkapp.databinding.ActivityLoginBinding;
-import com.ridhwankn.spkapp.viewmodel.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
-    private LoginViewModel viewModel;
+//    private LoginViewModel viewModel;
     private boolean mIsPasswordVisible = false;
-    private DatabaseReference databaseReference = FirebaseDatabase.getInstance()
+    private final DatabaseReference databaseReference = FirebaseDatabase.getInstance()
             .getReferenceFromUrl("https://spkwedding-b87ac-default-rtdb.firebaseio.com");
     private static ProgressDialog progressDialog;
+    public static String PREFS_NAME="MyPrefsFile";
+    public static String PREFS_USERNAME="username";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding =  ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+//        viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         initView();
 
@@ -76,12 +77,24 @@ public class LoginActivity extends AppCompatActivity {
                     if (snapshot.hasChild(binding.etName.getText().toString())){
                         final String getPassword = snapshot.child(binding.etName.getText().toString()).child("password").getValue(String.class);
                         if (binding.etPassword.getText().toString().equals(getPassword)){
+
+                            SharedPreferences sharedPreferences =getSharedPreferences(LoginActivity.PREFS_NAME,0);
+                            SharedPreferences prefUsername =getSharedPreferences(LoginActivity.PREFS_USERNAME,0);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            SharedPreferences.Editor editorUsername = prefUsername.edit();
+                            editor.putBoolean("hasLoggedIn", true);
+                            editorUsername.putString("username", binding.etName.getText().toString());
+                            editor.apply();
+                            editorUsername.apply();
+
                             Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                             intent.putExtra("name", binding.etName.getText().toString());
                             startActivity(intent);
                         } else {
-                            Toast.makeText(getApplicationContext(), "Wrong Password", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Invalid username or Password", Toast.LENGTH_SHORT).show();
                         }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Invalid Password", Toast.LENGTH_SHORT).show();
                     }
                     dismisDialog();
                 }

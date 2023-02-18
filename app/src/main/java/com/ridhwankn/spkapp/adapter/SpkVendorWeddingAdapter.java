@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ridhwankn.spkapp.R;
-import com.ridhwankn.spkapp.model.SpkVendorWeddingModel;
+import com.ridhwankn.spkapp.model.bean.SpkVendorWeddingBean;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -18,11 +18,16 @@ import java.util.ArrayList;
 
 public class SpkVendorWeddingAdapter extends RecyclerView.Adapter<SpkVendorWeddingAdapter.MyViewHolder>{
     private Context mContext;
-    private ArrayList<SpkVendorWeddingModel> list;
+    private ArrayList<SpkVendorWeddingBean> list;
+    private ItemClickListener mItemClickListener;
 
-    public SpkVendorWeddingAdapter(Context context, ArrayList<SpkVendorWeddingModel> list){
+    public SpkVendorWeddingAdapter(Context context, ArrayList<SpkVendorWeddingBean> list){
         this.mContext = context;
         this.list = list;
+    }
+
+    public void addItemClickListener(ItemClickListener listener) {
+        mItemClickListener = listener;
     }
 
     @NonNull
@@ -34,14 +39,18 @@ public class SpkVendorWeddingAdapter extends RecyclerView.Adapter<SpkVendorWeddi
 
     @Override
     public void onBindViewHolder(@NonNull SpkVendorWeddingAdapter.MyViewHolder holder, int position) {
-        SpkVendorWeddingModel bean = list.get(position);
-        holder.tvTitle.setText(bean.getNameVendor());
-        holder.tvNameGedung.setText(bean.getNameGedung());
-        holder.tvPrice.setText(formatCurrency(bean.getPrice()));
-        holder.tvRating.setText(Double.toString(bean.getRating()));
-        holder.tvLuasGedung.setText(Integer.toString(bean.getMaxGuest()));
-        holder.tvLuasParkir.setText(Integer.toString(bean.getTotalInvitation()));
-        holder.tvRasaMakanan.setText(Integer.toString(bean.getRasaMakanan()));
+        SpkVendorWeddingBean bean = list.get(position);
+        holder.tvTitle.setText(bean.getVendorName());
+        holder.tvNameGedung.setText(bean.getVenue());
+        holder.tvPrice.setText(formatCurrency(Double.parseDouble(bean.getPrice())));
+        holder.tvRating.setText(bean.getRating());
+        holder.tvLuasGedung.setText(bean.getMaximumGuests());
+        holder.tvLuasParkir.setText(bean.getInvitation());
+        holder.tvRasaMakanan.setText(bean.getTasteFood());
+
+        holder.btnDelete.setOnClickListener(v->{
+            mItemClickListener.onItemClick(bean.getUid());
+        });
     }
 
     public static String formatCurrency(double amount){
@@ -54,8 +63,12 @@ public class SpkVendorWeddingAdapter extends RecyclerView.Adapter<SpkVendorWeddi
         return list.size();
     }
 
+    public interface ItemClickListener {
+        void onItemClick(String uid);
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView tvTitle, tvNameGedung, tvPrice, tvRating, tvLuasGedung, tvLuasParkir,tvRasaMakanan;
+        private TextView tvTitle, tvNameGedung, tvPrice, tvRating, tvLuasGedung, tvLuasParkir,tvRasaMakanan, btnDelete;
         public MyViewHolder(View iteView){
             super(iteView);
             tvTitle = iteView.findViewById(R.id.tvTitle);
@@ -65,6 +78,7 @@ public class SpkVendorWeddingAdapter extends RecyclerView.Adapter<SpkVendorWeddi
             tvLuasGedung = iteView.findViewById(R.id.tvLuasGedung);
             tvLuasParkir = iteView.findViewById(R.id.tvLuasParkir);
             tvRasaMakanan = iteView.findViewById(R.id.tvRasaMakanan);
+            btnDelete = iteView.findViewById(R.id.btnDelete);
         }
 
         @Override

@@ -1,6 +1,7 @@
 package com.ridhwankn.spkapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ridhwankn.spkapp.databinding.ActivityMenuBinding;
+import com.ridhwankn.spkapp.model.bean.UserBean;
 
 import java.util.Date;
 
@@ -35,6 +37,10 @@ public class MenuActivity extends AppCompatActivity {
 
     private void initData(){
         name = getIntent().getStringExtra("name");
+        if (name==null){
+            SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_USERNAME,0);
+            name = sharedPreferences.getString("username", "");
+        }
 
         binding.tvName.setText("Hi "+name);
         binding.tvDate.setText(getDate().toString());
@@ -61,12 +67,28 @@ public class MenuActivity extends AppCompatActivity {
         });
 
         binding.ivLogout.setOnClickListener(v -> {
-            finish();
+            SharedPreferences sharedPreferences =getSharedPreferences(LoginActivity.PREFS_NAME,0);
+            SharedPreferences prefUsername =getSharedPreferences(LoginActivity.PREFS_USERNAME,0);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            SharedPreferences.Editor editorUsername = prefUsername.edit();
+            editor.putBoolean("hasLoggedIn", false);
+            editorUsername.putString("username", "");
+            editor.apply();
+            editorUsername.apply();
+
+            Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
+            startActivity(intent);
         });
 
         binding.ivSpk.setOnClickListener(v->{
-            Intent intent = new Intent(this, SpkVendorWeddingActivity.class);
-            startActivity(intent);
+            if (role.contains("customer")){
+                UserBean.getInstance().setUsername(name);
+                Intent intent = new Intent(this, SpkVendorWeddingActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(MenuActivity.this, "you don't have access to this menu", Toast.LENGTH_SHORT).show();
+            }
+
         });
         binding.ivAppInfo.setOnClickListener(v->{
             Intent intent = new Intent(this, AppInfoActivity.class);
@@ -82,6 +104,11 @@ public class MenuActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        // empty
     }
 
     private CharSequence getDate(){
