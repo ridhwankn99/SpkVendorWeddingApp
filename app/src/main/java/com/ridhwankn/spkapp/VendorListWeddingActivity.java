@@ -2,7 +2,6 @@ package com.ridhwankn.spkapp;
 
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import androidx.appcompat.app.AppCompatActivity;

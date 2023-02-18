@@ -2,7 +2,6 @@ package com.ridhwankn.spkapp.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.google.android.gms.common.util.CollectionUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +23,6 @@ import com.ridhwankn.spkapp.adapter.SpkVendorWeddingAdapter;
 import com.ridhwankn.spkapp.databinding.FragmentListVendorUserBinding;
 import com.ridhwankn.spkapp.model.bean.SpkVendorWeddingBean;
 import com.ridhwankn.spkapp.model.bean.UserBean;
-import com.ridhwankn.spkapp.model.bean.VendorUserBean;
 
 import java.util.ArrayList;
 import java.util.Collections;
