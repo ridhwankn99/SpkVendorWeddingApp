@@ -38,7 +38,7 @@
         android:background="@drawable/button_background_dark"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Konfirmasi"
+        android:text="Tentukan Vendor"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

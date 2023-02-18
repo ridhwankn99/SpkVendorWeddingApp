@@ -129,7 +129,7 @@ public class InputVendorFragment extends Fragment {
         databaseReference.child("vendor").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChild(query)){
+                if (snapshot.hasChild(query.trim())){
                     binding.etNameVendor.setText(snapshot.child(query).child("vendorName").getValue(String.class));
                     binding.etNameGedung.setText(snapshot.child(query).child("venue").getValue(String.class));
                     binding.etPrice.setText(snapshot.child(query).child("price").getValue(String.class));
@@ -137,6 +137,8 @@ public class InputVendorFragment extends Fragment {
                     binding.etTtlInvitation.setText(snapshot.child(query).child("invitation").getValue(String.class));
                     binding.etMaxGuest.setText(snapshot.child(query).child("maximumGuests").getValue(String.class));
                     binding.etRasaMakanan.setText(snapshot.child(query).child("tasteFood").getValue(String.class));
+                } else {
+                    Toast.makeText(getActivity(), "Data vendor not found", Toast.LENGTH_SHORT).show();
                 }
                 dismisDialog();
             }

@@ -54,11 +54,11 @@ public class MenuActivity extends AppCompatActivity {
                     role = snapshot.child(name).child("role").getValue(String.class);
                     dismisDialog();
                 }
+                dismisDialog();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                dismisDialog();
             }
         });
     }

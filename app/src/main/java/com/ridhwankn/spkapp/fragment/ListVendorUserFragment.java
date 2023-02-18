@@ -35,9 +35,6 @@ public class ListVendorUserFragment extends Fragment implements SpkVendorWedding
     private FragmentListVendorUserBinding binding;
     private SpkVendorWeddingAdapter adapter;
     private ArrayList<SpkVendorWeddingBean> list= new ArrayList<>();
-    private ArrayList<SpkVendorWeddingBean> listBean= new ArrayList<>();
-    private ArrayList<SpkVendorWeddingBean> listBean2= new ArrayList<>();
-    private ArrayList<SpkVendorWeddingBean> listBean3= new ArrayList<>();
     private SpkVendorWeddingBean bean = new SpkVendorWeddingBean();
     private ArrayList<Double> normalisasi = new ArrayList<>();
     private ArrayList<Double> valueV = new ArrayList<>();
@@ -115,12 +112,13 @@ public class ListVendorUserFragment extends Fragment implements SpkVendorWedding
                 return;
             }
             for (int i =0; i<list.size(); i++){
-                normalisasi.add(Math.pow(Double.parseDouble(list.get(i).getPrice()),W1)
-                        *Math.pow(Double.parseDouble(list.get(i).getRating()),W2)
-                        *Math.pow(Double.parseDouble(list.get(i).getMaximumGuests()),W3)
-                        *Math.pow(Double.parseDouble(list.get(i).getInvitation()),W4)
-                        *Math.pow(Double.parseDouble(list.get(i).getTasteFood()),W5)
-                );
+                double s1 = Math.pow(Double.parseDouble(list.get(i).getPrice()),W1);
+                double s2 = Math.pow(Double.parseDouble(list.get(i).getRating()),W2);
+                double s3 = Math.pow(Double.parseDouble(list.get(i).getMaximumGuests()),W3);
+                double s4 = Math.pow(Double.parseDouble(list.get(i).getInvitation()),W4);
+                double s5 = Math.pow(Double.parseDouble(list.get(i).getTasteFood()),W5);
+                double nTotal = s1*s2*s3*s4*s5;
+                normalisasi.add(nTotal);
             }
             for (int i = 0; i<normalisasi.size(); i++){
                 sumNormalisasi += normalisasi.get(i);
@@ -133,18 +131,18 @@ public class ListVendorUserFragment extends Fragment implements SpkVendorWedding
             int index = valueV.indexOf(obj);
 
             System.out.println("Max Element of Java ArrayList is : " + obj+ " and index position is " + index);
-
-            for (int i=0; i<list.size(); i++){
-                if (index==i){
-                    bean.setVendorName(list.get(i).getVendorName());
-                    bean.setInvitation(list.get(i).getInvitation());
-                    bean.setPrice(list.get(i).getPrice());
-                    bean.setVenue(list.get(i).getVenue());
-                    bean.setRating(list.get(i).getRating());
-                    bean.setMaximumGuests(list.get(i).getMaximumGuests());
-                    bean.setTasteFood(list.get(i).getTasteFood());
-                }
-            }
+            bean.setVendorName(list.get(index).getVendorName());
+            bean.setInvitation(list.get(index).getInvitation());
+            bean.setPrice(list.get(index).getPrice());
+            bean.setVenue(list.get(index).getVenue());
+            bean.setRating(list.get(index).getRating());
+            bean.setMaximumGuests(list.get(index).getMaximumGuests());
+            bean.setTasteFood(list.get(index).getTasteFood());
+//            for (int i=0; i<list.size(); i++){
+//                if (index==i){
+//
+//                }
+//            }
             Intent intent = new Intent(getActivity(), ResultVendorWeddingActivity.class);
             intent.putExtra("price", Double.parseDouble(bean.getPrice()));
             intent.putExtra("vendorName", bean.getVendorName());

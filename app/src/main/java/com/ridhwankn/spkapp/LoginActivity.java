@@ -74,21 +74,23 @@ public class LoginActivity extends AppCompatActivity {
             databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.hasChild(binding.etName.getText().toString())){
-                        final String getPassword = snapshot.child(binding.etName.getText().toString()).child("password").getValue(String.class);
-                        if (binding.etPassword.getText().toString().equals(getPassword)){
+                    String username = binding.etName.getText().toString().trim();
+                    String password = binding.etPassword.getText().toString().trim();
+                    if (snapshot.hasChild(username)){
+                        final String getPassword = snapshot.child(username).child("password").getValue(String.class);
+                        if (password.equals(getPassword)){
 
                             SharedPreferences sharedPreferences =getSharedPreferences(LoginActivity.PREFS_NAME,0);
                             SharedPreferences prefUsername =getSharedPreferences(LoginActivity.PREFS_USERNAME,0);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             SharedPreferences.Editor editorUsername = prefUsername.edit();
                             editor.putBoolean("hasLoggedIn", true);
-                            editorUsername.putString("username", binding.etName.getText().toString());
+                            editorUsername.putString("username", username);
                             editor.apply();
                             editorUsername.apply();
 
                             Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                            intent.putExtra("name", binding.etName.getText().toString());
+                            intent.putExtra("name", username);
                             startActivity(intent);
                         } else {
                             Toast.makeText(getApplicationContext(), "Invalid username or Password", Toast.LENGTH_SHORT).show();
